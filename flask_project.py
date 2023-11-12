@@ -64,13 +64,17 @@ def get_task(task_id):
         2: Math(5, "-", 2),
     }
     task = tasks.get(task_id)
-    if task:
-        return jsonify(task)
-    return jsonify({"message": "User not found"}), 404
+    return task
 
 @app.route('/funktional/<int:task_id>', methods=['GET'])
 def funktional(task_id):
-    return get_task(task_id)
+    task = get_task(task_id)
+
+    if task:
+        result = task.result
+        return f"Das Ergebnis lautet: {result}"
+    else:
+        return "Aufgabe nicht gefunden."
 
 #B1G----------------------------------------------------
 
